@@ -54,6 +54,13 @@ sudo yum install -y ansible
 # Install Python
 sudo yum install -y python3
 
+# Install kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+chmod +x kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
+
 # Verify installation
 echo "Verifying installations..."
 echo "Git version: $(git --version)"
@@ -63,11 +70,11 @@ echo "Docker version: $(docker --version)"
 echo "Docker status: $(systemctl is-active docker)"
 echo "Ansible version: $(ansible --version | head -n 1)"
 echo "Python version: $(python3 --version)"
+echo "Kubectl Installtion: $(kubectl version --client --output=yaml )"
 
 echo "Installation completed successfully."
 
-# Install kubectl
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
 
 # Gcloud Login 
 
